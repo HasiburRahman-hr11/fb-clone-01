@@ -74,7 +74,7 @@ export default function ProfileBottomLeft({ profile }) {
                 <div className="profile__leftbar_friendlist d__flex align__centers">
                     <h4 className="leftbar__item_title">Followings</h4>
                 </div>
-                <p className="total__friends">{profile?.followers && profile.followings.length} Following{profile?.followers && profile.followings.length > 1 ? 's' : ''}</p>
+                <p className="total__friends">{profile?.followings && profile.followings.length} Following{profile?.followings && profile.followings.length > 1 ? 's' : ''}</p>
                 <div className="profile__leftbar_friends">
 
                     {followings.map(following => (
@@ -88,7 +88,7 @@ export default function ProfileBottomLeft({ profile }) {
                 <div className="profile__leftbar_friendlist d__flex align__centers">
                     <h4 className="leftbar__item_title">Followers</h4>
                 </div>
-                <p className="total__friends">{profile?.followers && profile.followers.length} follower{profile?.followers && profile.followings.length > 1 ? 's' : ''}</p>
+                <p className="total__friends">{profile?.followers && profile.followers.length} follower{profile?.followers && profile.followers.length > 1 ? 's' : ''}</p>
                 <div className="profile__leftbar_friends">
 
                     {followers.map(follower => (
