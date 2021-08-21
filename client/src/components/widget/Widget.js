@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 export default function Widget() {
     const { following } = useContext(UserContext);
-    console.log(following)
     return (
         <div className="widget scrollbar">
             <div className="widget__wrapper">
