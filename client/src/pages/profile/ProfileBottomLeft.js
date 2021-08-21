@@ -73,7 +73,6 @@ export default function ProfileBottomLeft({ profile }) {
             <div className="profile__leftbar_item">
                 <div className="profile__leftbar_friendlist d__flex align__centers">
                     <h4 className="leftbar__item_title">Followings</h4>
-                    <span>See All Followings</span>
                 </div>
                 <p className="total__friends">{profile?.followers && profile.followings.length} Followings</p>
                 <div className="profile__leftbar_friends">
@@ -88,7 +87,6 @@ export default function ProfileBottomLeft({ profile }) {
             <div className="profile__leftbar_item">
                 <div className="profile__leftbar_friendlist d__flex align__centers">
                     <h4 className="leftbar__item_title">Followers</h4>
-                    <span>See All Followers</span>
                 </div>
                 <p className="total__friends">{profile?.followers && profile.followers.length} followers</p>
                 <div className="profile__leftbar_friends">
