@@ -13,7 +13,7 @@ export default function ProfileBottomLeft({ profile }) {
     useEffect(() => {
         const fetchFollowers = async () => {
             try {
-                const res = await axios.get(`/profile/followers/${profile?._id}`)
+                const res = await axios.get(`/api/profile/followers/${profile?._id}`)
                 setFollowers(res.data.followers)
             } catch (e) {
                 // error
@@ -23,7 +23,7 @@ export default function ProfileBottomLeft({ profile }) {
 
         const fetchAllFollowings = async () => {
             try {
-                const res = await axios.get(`/profile/followings/${profile?._id}`)
+                const res = await axios.get(`/api/profile/followings/${profile?._id}`)
                 setFollowings(res.data.followings)
             } catch (e) {
                 // error

@@ -7,7 +7,7 @@ import './sidebar.css';
 import SidebarItem from './sidebar-item/SidebarItem';
 
 // Material Icons
-import { EmojiFlags, People, SupervisedUserCircle, Event, Storefront, VideoLibrary, Bookmark, Work, ExpandMoreOutlined, ExitToApp } from '@material-ui/icons';
+import { EmojiFlags, People, SupervisedUserCircle, ExpandMoreOutlined, ExitToApp } from '@material-ui/icons';
 
 import Loading from '../loading/Loading';
 

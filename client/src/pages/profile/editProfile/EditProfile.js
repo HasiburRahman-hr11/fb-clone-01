@@ -49,7 +49,7 @@ export default function EditProfile() {
         e.preventDefault();
 
         try {
-            const res = await axios.post(`/profile/edit/${user.id}`, editData)
+            const res = await axios.post(`/api/profile/edit/${user.id}`, editData)
             if (res.data.success) {
                 setUpdated(true)
                 setUserProfile(res.data.profile)

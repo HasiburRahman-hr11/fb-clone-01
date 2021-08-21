@@ -4,9 +4,7 @@ import { IconButton } from '@material-ui/core';
 import Active from './active/Active';
 import UserContext from '../../context/UserContext';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom'
-
-const PF = process.env.REACT_APP_DEFAULT_FOLDER
+import { Link } from 'react-router-dom';
 
 export default function Widget() {
     const { following } = useContext(UserContext);
@@ -62,7 +60,7 @@ export default function Widget() {
 
                     {following && following.map((f, i) => (
                         <Link key={i} to={`/profile/${f._id}`}>
-                            <Active  image={PF + f.profilePicture} title={f?.firstName + ' ' + f?.lastName} />
+                            <Active  image={f.profilePicture} title={f?.firstName + ' ' + f?.lastName} />
                         </Link>
 
                     ))}

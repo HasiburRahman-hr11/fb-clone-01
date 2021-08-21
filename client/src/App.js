@@ -37,7 +37,7 @@ function App() {
     // Get Logged in user's token
     const getToken = async () => {
       try {
-        const res = await axios.get('/home', { headers: { 'x-access-token': localStorage.getItem('token') } })
+        const res = await axios.get('/api/home', { headers: { 'x-access-token': localStorage.getItem('token') } })
         if (res.data.user) {
           setUser(res.data.user)
         }
@@ -52,7 +52,7 @@ function App() {
     // Get Loggedin user,s profile
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`/profile/${user?.id}`)
+        const res = await axios.get(`/api/profile/${user?.id}`)
         setUserProfile(res.data)
         setProfilePicture(res.data.profilePicture);
         setFollowers(res.data.followers);
@@ -73,7 +73,7 @@ function App() {
       }
 
       try {
-        const res = await axios.post(`/posts`, data)
+        const res = await axios.post(`/api/posts`, data)
         setPosts(res.data.reverse());
       } catch (e) {
         // error
@@ -85,7 +85,7 @@ function App() {
     // Get All users
     const fetchAllUsers = async () =>{
       try{
-        const res = await axios.get('/profile/all-user');
+        const res = await axios.get('/api/profile/all-user');
         setAllUsers(res.data)
       }catch(e){
         // error

@@ -32,7 +32,7 @@ export default function Share() {
         e.preventDefault();
 
         try {
-            const res = await axios.post('/posts/create-post', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+            const res = await axios.post('/api/posts/create-post', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
 
             setPosts(res.data.reverse());
             setText('')

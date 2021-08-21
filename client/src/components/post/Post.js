@@ -25,7 +25,7 @@ export default function Post({ post, isUser }) {
                 userId: user.id
             }
 
-            const res = await axios.put(`/posts/like/${post._id}`, data);
+            const res = await axios.put(`/api/posts/like/${post._id}`, data);
             if (res.status === 200) {
                 setLiked(!liked)
             }
@@ -45,7 +45,7 @@ export default function Post({ post, isUser }) {
     // Delete Post
     const handlePostDelete = async () => {
         try{
-             const res = await axios.delete(`/posts/delete/${post._id}` , {data:{userId:user?.id}});
+             const res = await axios.delete(`/api/posts/delete/${post._id}` , {data:{userId:user?.id}});
             setModal(false);
             setPosts(res.data.reverse());
             // window.location.reload(false);

@@ -74,7 +74,7 @@ export default function Register() {
 
         if (Object.keys(errors).length === 0) {
             try {
-                await axios.post('/auth/register', formData);
+                await axios.post('/api/auth/register', formData);
                 setFormData({
                     firstName: '',
                     lastName: '',
