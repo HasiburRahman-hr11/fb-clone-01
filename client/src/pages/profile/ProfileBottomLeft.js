@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Friend from './friends/Friend';
 import axios from 'axios';
 
-const PF = process.env.REACT_APP_DEFAULT_FOLDER
 
 export default function ProfileBottomLeft({ profile }) {
 
@@ -80,7 +79,7 @@ export default function ProfileBottomLeft({ profile }) {
                 <div className="profile__leftbar_friends">
 
                     {followings.map(following => (
-                        <Friend name={following?.firstName} image={PF+following?.profilePicture} url={`/profile/${following._id}`} key={following._id} />
+                        <Friend name={following?.firstName} image={following?.profilePicture} url={`/profile/${following._id}`} key={following._id} />
                     ))}
 
                 </div>
@@ -95,7 +94,7 @@ export default function ProfileBottomLeft({ profile }) {
                 <div className="profile__leftbar_friends">
 
                     {followers.map(follower => (
-                        <Friend name={follower?.firstName} image={PF+follower?.profilePicture} url={`/profile/${follower._id}`} key={follower._id}  />
+                        <Friend name={follower?.firstName} image={follower?.profilePicture} url={`/profile/${follower._id}`} key={follower._id}  />
                     ))}
 
                 </div>
