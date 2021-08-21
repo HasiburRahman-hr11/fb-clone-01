@@ -1,0 +1,112 @@
+.edit__profile{
+    justify-content: center;
+    margin-top: 30px;
+}
+.edit__profile_wrapper , .update__message{
+    background-color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    max-width: 800px;
+}
+.update__message{
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    color: #1977F3;
+    position: relative;
+}
+.close__update_message{
+    position: absolute;
+    right: 8px;
+    top: 10px;
+    color: #1977F3 !important;
+    height: 30px !important;
+    width: 30px !important;
+    cursor: pointer;
+}
+.edit__profile_title{
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+}
+.edit__profile_title span{
+    font-weight: 600;
+    color: #1977F3;
+}
+.form__input_box{
+    margin-bottom: 10px;
+}
+.input__half{
+    width: 50%;
+    padding: 0 5px;
+}
+.input__full{
+    padding: 0 5px;
+}
+.form__input_box label , .edit__form_input{
+    display: block;
+    width: 100%;
+}
+.form__input_box label{
+    font-weight: 500;
+    margin-bottom: 3px;
+    color: #5d5e5f;
+}
+.edit__form_input{
+    height: 35px;
+    border: 1px solid #aaaaac;
+    padding: 3px 10px;
+    color: #464646;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.edit__form_input:focus{
+    outline: none;
+    border-color: #5d5e5f;
+}
+
+textarea.edit__form_input{
+    min-height: 100px;
+    font-size: 18px !important;
+}
+.edit__form_input::placeholder{
+    color: #aaaaac;
+    font-weight: 500;
+}
+.edit__profile_submit{
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #1977F3;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}
+.edit__profile_submit:focus{
+    outline: none;
+}
+.edit__profile_submit:disabled{
+    cursor: not-allowed;
+    background-color: #8eb8ee;
+}
+
+@media only screen and (max-width:560px){
+    .edit__profile_title {
+        font-size: 20px;
+    }
+    .form__input_box.d__flex{
+        display: block;
+    }
+    .input__half {
+        width: 100%;
+        padding: 0;
+        margin-top: 10px;
+    }
+    .input__full {
+        padding: 0;
+    }
+}

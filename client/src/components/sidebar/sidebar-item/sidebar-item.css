@@ -1,0 +1,24 @@
+
+.sidebar__item{
+    padding: 7px 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 3px;
+}
+.sidebar__item:hover{
+    background-color: #E4E6E9;
+}
+.sidebar__avatar{
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.sidebar__icon{
+    font-size: 30px !important;
+    color: #1977F3;
+}
+.sidebar__item_title{
+    font-weight: 500;
+    margin-left: 8px;
+}

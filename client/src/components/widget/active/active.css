@@ -1,0 +1,23 @@
+.active__friend{
+    padding: 8px 5px;
+    position: relative;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.active__friend:hover{
+    background-color: #E4E6E9;
+}
+.active__friend_avatar{
+    margin-right: 8px;
+    width: 33px !important;
+    height: 33px !important;
+}
+.active__status{
+    width: 5px;
+    height: 5px;
+    background-color: #11ca00;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 12px;
+    left: 32px;
+}

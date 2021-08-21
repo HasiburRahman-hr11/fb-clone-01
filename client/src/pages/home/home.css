@@ -1,0 +1,12 @@
+.home.main__content{
+    height: calc(100vh - 55px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+@media only screen and (max-width:1100px){
+    .home .sidebar {
+        display: none;
+    }
+}
+

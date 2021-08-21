@@ -1,0 +1,42 @@
+.stories {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: calc(100% + 60px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-height: 220px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.stories::-webkit-scrollbar{
+    display: none;
+}
+
+
+
+@media only screen and (min-width:1900px){
+    .stories{
+        min-height: 320px;
+    }
+}
+
+@media only screen and (min-width:1500px) and (max-width:1899px){
+    .stories{
+        min-height: 290px;
+    }
+}
+
+@media only screen and (max-width:560px) {
+    .stories {
+        min-height: 220px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:375px) {
+    .stories {
+        min-height: 180px;
+    }
+}

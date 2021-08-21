@@ -1,0 +1,9 @@
+.sidebar{
+    flex: 0.40;
+    height: calc(100vh - 55px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-top: 20px;
+}
+
+
