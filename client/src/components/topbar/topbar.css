@@ -236,7 +236,7 @@
         display: inline-block;
         font-weight: 600;
         color: #1877F2;
-        font-size: 18px;
+        font-size: 20px;
     }
     .topbar__left{
         justify-content: space-between;
@@ -248,8 +248,8 @@
         display: none;
     }
     .search__icon {
-        width: 30px !important;
-        height: 30px !important;
+        width: 35px !important;
+        height: 35px !important;
         padding: 3px !important;
     }
     .topbar__right{
@@ -257,13 +257,14 @@
     }
     .topbar__options {
         justify-content: space-between;
+        margin-top: 9px;
     }
     .topbar__option {
         padding: 0px 10px;
     }
     .topbar__option_icon{
-        width: 25px !important;
-        height: 25px !important;
+        width: 30px !important;
+        height: 30px !important;
     }
     .topbar__action_btn{
         padding: 8px !important;
