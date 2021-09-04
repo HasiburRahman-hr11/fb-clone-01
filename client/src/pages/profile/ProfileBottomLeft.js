@@ -12,7 +12,7 @@ export default function ProfileBottomLeft({ profile }) {
     useEffect(() => {
         const fetchFollowers = async () => {
             try {
-                const res = await axios.get(`/profile/followers/${profile?._id}`)
+                const res = await axios.get(`/api/profile/followers/${profile?._id}`)
                 setFollowers(res.data.followers)
             } catch (e) {
                 // error
@@ -22,7 +22,7 @@ export default function ProfileBottomLeft({ profile }) {
 
         const fetchAllFollowings = async () => {
             try {
-                const res = await axios.get(`/profile/followings/${profile?._id}`)
+                const res = await axios.get(`/api/profile/followings/${profile?._id}`)
                 setFollowings(res.data.followings)
             } catch (e) {
                 // error
@@ -79,8 +79,10 @@ export default function ProfileBottomLeft({ profile }) {
                 <div className="profile__leftbar_friends">
 
                     {followings.map(following => (
-                        <Friend name={following?.firstName} image={following?.profilePicture} url={`/profile/${following._id}`} key={following._id} />
+                        <Friend name={following?.firstName} image={following?.profilePicture === '/uploads/avatar.png' ? process.env.REACT_APP_DEF_FOLDER+following?.profilePicture : following?.profilePicture} url={`/profile/${following._id}`} key={following._id} />
                     ))}
+
+
 
                 </div>
             </div>
@@ -94,8 +96,10 @@ export default function ProfileBottomLeft({ profile }) {
                 <div className="profile__leftbar_friends">
 
                     {followers.map(follower => (
-                        <Friend name={follower?.firstName} image={follower?.profilePicture} url={`/profile/${follower._id}`} key={follower._id}  />
+                        <Friend name={follower?.firstName} image={follower?.profilePicture === '/uploads/avatar.png' ? process.env.REACT_APP_DEF_FOLDER+follower?.profilePicture : follower?.profilePicture} url={`/profile/${follower._id}`} key={follower._id}  />
                     ))}
+
+
 
                 </div>
             </div>

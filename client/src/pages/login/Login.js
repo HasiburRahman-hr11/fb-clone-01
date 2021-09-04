@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import './login.css';
 import { AuthContext } from '../../context/authContext/authContext';
 import { login } from '../../context/authContext/apiCalls';
-import {CircularProgress} from '@material-ui/core'
+import { CircularProgress } from '@material-ui/core'
 
 
 export default function Login() {
@@ -17,7 +17,6 @@ export default function Login() {
     const history = useHistory();
 
 
-
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
@@ -27,18 +26,20 @@ export default function Login() {
         e.preventDefault();
 
         login(dispatch, formData);
-        history.push('/');
 
-        // if (loginError?.response.data.errorEmail) {
-        //     errors.email = loginError?.response.data.errorEmail
-        // }
-        // if (loginError?.response.data.errorPass) {
-        //     errors.password = loginError?.response.data.errorPass
-        // }
-        // setError(errors)
+        console.log(loginError)
 
-        
-
+        if (loginError) {
+            if (loginError?.response.data.errorEmail) {
+                errors.email = loginError?.response.data.errorEmail
+            }
+            if (loginError?.response.data.errorPass) {
+                errors.password = loginError?.response.data.errorPass
+            }
+            setError(errors)
+        } else {
+            history.push('/');
+        }
     }
 
     return (

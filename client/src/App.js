@@ -43,7 +43,7 @@ function App() {
     const fetchProfile = async () => {
       setIsloading(true)
       try {
-        const res = await axios.get(`/profile/${user?.id}`)
+        const res = await axios.get(`/api/profile/${user?.id}`)
         setUserProfile(res.data)
         setProfilePicture(res.data.profilePicture);
         setFollowers(res.data.followers);
@@ -61,7 +61,7 @@ function App() {
       }
 
       try {
-        const res = await axios.post(`/posts`, data)
+        const res = await axios.post(`/api/posts`, data)
         setPosts(res.data.reverse());
       } catch (e) {
         // error
@@ -71,7 +71,7 @@ function App() {
     // Get All users
     const fetchAllUsers = async () => {
       try {
-        const res = await axios.get('/profile/all-user');
+        const res = await axios.get('/api/profile/all-user');
         setAllUsers(res.data)
       } catch (e) {
         // error

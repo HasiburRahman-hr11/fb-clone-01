@@ -44,7 +44,7 @@ export default function Profile() {
         const fetchProfile = async () => {
             setIsloading(true)
             try {
-                const res = await axios.get(`/profile/${params?.id}`)
+                const res = await axios.get(`/api/profile/${params?.id}`)
                 setProfile(res.data)
                 setPosts(res.data.posts.reverse())
                 res.data.followers.forEach((follower)=>{

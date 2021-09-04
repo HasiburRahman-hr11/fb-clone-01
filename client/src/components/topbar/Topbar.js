@@ -25,7 +25,7 @@ export default function Topbar() {
 
     const searchHandler = async (term) => {
         try {
-            const res = await axios.get(`/search?term=${term}`)
+            const res = await axios.get(`/api/search?term=${term}`)
             if (res.status === 200) {
                 setSearchResponse(res.data)
                 if(res.data.length > 0){
