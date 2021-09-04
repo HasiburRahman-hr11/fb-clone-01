@@ -27,8 +27,6 @@ export default function Login() {
 
         login(dispatch, formData);
 
-        console.log(loginError)
-
         if (loginError) {
             if (loginError?.response.data.errorEmail) {
                 errors.email = loginError?.response.data.errorEmail
