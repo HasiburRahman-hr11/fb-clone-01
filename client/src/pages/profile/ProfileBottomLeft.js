@@ -12,7 +12,7 @@ export default function ProfileBottomLeft({ profile }) {
     useEffect(() => {
         const fetchFollowers = async () => {
             try {
-                const res = await axios.get(`/api/profile/followers/${profile?._id}`)
+                const res = await axios.get(`/profile/followers/${profile?._id}`)
                 setFollowers(res.data.followers)
             } catch (e) {
                 // error
@@ -22,7 +22,7 @@ export default function ProfileBottomLeft({ profile }) {
 
         const fetchAllFollowings = async () => {
             try {
-                const res = await axios.get(`/api/profile/followings/${profile?._id}`)
+                const res = await axios.get(`/profile/followings/${profile?._id}`)
                 setFollowings(res.data.followings)
             } catch (e) {
                 // error
@@ -73,8 +73,9 @@ export default function ProfileBottomLeft({ profile }) {
             <div className="profile__leftbar_item">
                 <div className="profile__leftbar_friendlist d__flex align__centers">
                     <h4 className="leftbar__item_title">Followings</h4>
+                    <span>See All Followings</span>
                 </div>
-                <p className="total__friends">{profile?.followings && profile.followings.length} Following{profile?.followings && profile.followings.length > 1 ? 's' : ''}</p>
+                <p className="total__friends">{profile?.followers && profile.followings.length} Followings</p>
                 <div className="profile__leftbar_friends">
 
                     {followings.map(following => (
@@ -87,8 +88,9 @@ export default function ProfileBottomLeft({ profile }) {
             <div className="profile__leftbar_item">
                 <div className="profile__leftbar_friendlist d__flex align__centers">
                     <h4 className="leftbar__item_title">Followers</h4>
+                    <span>See All Followers</span>
                 </div>
-                <p className="total__friends">{profile?.followers && profile.followers.length} follower{profile?.followers && profile.followers.length > 1 ? 's' : ''}</p>
+                <p className="total__friends">{profile?.followers && profile.followers.length} followers</p>
                 <div className="profile__leftbar_friends">
 
                     {followers.map(follower => (

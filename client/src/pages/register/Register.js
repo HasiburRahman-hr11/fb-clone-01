@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './register.css';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -16,13 +16,6 @@ export default function Register() {
     const [error, setError] = useState({});
     const history = useHistory();
 
-    useEffect(() => {
-        // Checking if user is logged in
-        const token = localStorage.getItem('token');
-        if (token) {
-            history.push('/');
-        }
-    }, [history])
 
     let errors = {}
     const validateForm = () => {
@@ -74,7 +67,7 @@ export default function Register() {
 
         if (Object.keys(errors).length === 0) {
             try {
-                await axios.post('/api/auth/register', formData);
+                await axios.post('/auth/register', formData);
                 setFormData({
                     firstName: '',
                     lastName: '',
@@ -91,8 +84,6 @@ export default function Register() {
                     setError({ ...error, email: e.response.data.errorEmail })
                 }
             }
-        } else {
-            console.log(Object.keys(errors).length)
         }
 
     }

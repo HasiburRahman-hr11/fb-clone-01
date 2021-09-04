@@ -89,7 +89,13 @@ exports.authLoginController = async (req, res, next) => {
                 }else{
                     return res.status(200).json({
                         message: 'Success',
-                        token
+                        token,
+                        user: {
+                            id: user._id,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            profilePicture: user.profilePicture
+                        }
                     })
                 }
             }

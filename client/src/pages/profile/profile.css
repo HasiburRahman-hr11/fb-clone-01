@@ -24,10 +24,10 @@
     right: 9px;
     padding: 3px 5px;
     border-radius: 4px;
-    border: 3px solid #fff;
+    border: 3px solid #444;
 }
 .edit__cover_icon{
-    color: #fff !important;
+    color: #444 !important;
     cursor: pointer;
 }
 

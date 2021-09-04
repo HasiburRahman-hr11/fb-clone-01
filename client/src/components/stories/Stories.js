@@ -16,8 +16,8 @@ export default function Stories() {
                 <Loading/>
             )}
             <Story 
-            image={profilePicture}
-            profilePic={profilePicture}
+            image={profilePicture === '/uploads/avatar.png' ? process.env.REACT_APP_DEF_FOLDER+profilePicture : profilePicture} 
+            profilePic={profilePicture === '/uploads/avatar.png' ? process.env.REACT_APP_DEF_FOLDER+profilePicture : profilePicture} 
             title={profile?.firstName}
             user
             />

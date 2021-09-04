@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useState, useEffect, useRef, useContext } from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 // Get token from utils
@@ -18,14 +18,17 @@ import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
 import Error from './pages/error/Error';
 import User from './pages/users/User';
+import { AuthContext } from './context/authContext/authContext';
+
 
 function App() {
-  const [user, setUser] = useState({});
+  const { user } = useContext(AuthContext)
+
   const [allUsers, setAllUsers] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [profile, setUserProfile] = useState({});
-  const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsloading] = useState(null);
   const [profilePicture, setProfilePicture] = useState('');
   const [posts, setPosts] = useState([]);
 
@@ -34,25 +37,13 @@ function App() {
 
   useEffect(() => {
 
-    // Get Logged in user's token
-    const getToken = async () => {
-      try {
-        const res = await axios.get('/api/home', { headers: { 'x-access-token': localStorage.getItem('token') } })
-        if (res.data.user) {
-          setUser(res.data.user)
-        }
-
-      } catch (e) {
-        console.log(e)
-      }
-    }
-    getToken();
-
+    if(!user) return;
 
     // Get Loggedin user,s profile
     const fetchProfile = async () => {
+      setIsloading(true)
       try {
-        const res = await axios.get(`/api/profile/${user?.id}`)
+        const res = await axios.get(`/profile/${user?.id}`)
         setUserProfile(res.data)
         setProfilePicture(res.data.profilePicture);
         setFollowers(res.data.followers);
@@ -62,74 +53,79 @@ function App() {
         // error
       }
     }
-    fetchProfile();
-
-
 
     // Get posts of users following
     const fetchPosts = async () => {
       const data = {
-        userId: user.id
+        userId: user?.id
       }
 
       try {
-        const res = await axios.post(`/api/posts`, data)
+        const res = await axios.post(`/posts`, data)
         setPosts(res.data.reverse());
       } catch (e) {
         // error
       }
     }
-    fetchPosts();
-
 
     // Get All users
-    const fetchAllUsers = async () =>{
-      try{
-        const res = await axios.get('/api/profile/all-user');
+    const fetchAllUsers = async () => {
+      try {
+        const res = await axios.get('/profile/all-user');
         setAllUsers(res.data)
-      }catch(e){
+      } catch (e) {
         // error
       }
     }
+
+    fetchPosts();
+    fetchProfile();
     fetchAllUsers()
 
-
-  }, [user.id]);
+  }, [user]);
 
 
   return (
-    <UserContext.Provider value={{ user, sharePic, topBarPic, profile, profilePicture, posts, isLoading , setUserProfile,  setProfilePicture, setPosts, following }}>
+    <UserContext.Provider value={{ user, sharePic, topBarPic, profile, profilePicture, posts, isLoading, setUserProfile, setProfilePicture, setPosts, following }}>
       <Router>
         <Switch>
           <Route exact path="/">
-            <Home />
+            {user ? <Home /> : <Redirect to='/auth/login' />}
+
           </Route>
           <Route exact path="/profile/:id">
-            <Profile />
+            {user ? <Profile /> : <Redirect to='/auth/login' />}
+
           </Route>
           <Route exact path="/profile/edit/:id">
             <EditProfile />
           </Route>
           <Route exact path="/sidebar">
-            <>
-              <Topbar />
-              <Sidebar />
-            </>
+            {user ? (
+              <>
+                <Topbar />
+                <Sidebar />
+              </>
+            ) : <Redirect to='/auth/login' />}
+
           </Route>
           <Route exact path="/people/all">
-            <User users={allUsers} title="All Users" />
+            {user ? <User users={allUsers} title="All Users" /> : <Redirect to='/auth/login' />}
+
           </Route>
           <Route exact path="/followers" >
-            <User users={followers} title="Followers"/>
+            {user ? <User users={followers} title="Followers" /> : <Redirect to='/auth/login' />}
+
           </Route>
           <Route exact path="/following" >
-            <User users={following} title="Following"/>
+            {user ? <User users={following} title="Following" /> : <Redirect to='/auth/login' />}
+
           </Route>
           <Route exact path="/auth/login">
-            <Login />
+            {user ? <Redirect to='/' /> : <Login />}
           </Route>
           <Route exact path="/auth/register">
-            <Register />
+            {user ? <Redirect to='/' /> : <Register />}
           </Route>
           <Route>
             <Error />

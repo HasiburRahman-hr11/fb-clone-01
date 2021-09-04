@@ -4,7 +4,8 @@ import { IconButton } from '@material-ui/core';
 import Active from './active/Active';
 import UserContext from '../../context/UserContext';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+
 
 export default function Widget() {
     const { following } = useContext(UserContext);

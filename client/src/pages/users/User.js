@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import './users.css';
 import Topbar from '../../components/topbar/Topbar';
 import Loading from '../../components/loading/Loading';
@@ -9,16 +9,6 @@ import Sidebar from '../../components/sidebar/Sidebar';
 
 export default function User({ users, title }) {
     const { isLoading } = useContext(UserContext);
-
-    const history = useHistory()
-    // Checking if user is logged in
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            history.push('/auth/login')
-        }
-    }, [history]);
 
     // Sort Users
     users.sort(function(a, b){
@@ -42,7 +32,7 @@ export default function User({ users, title }) {
                         {users?.length > 0 && users.map(user => (
                             <Link to={`/profile/${user._id}`} key={user._id} className="user__list_item">
                                 <div className="user__profilePic">
-                                    <img src={user.profilePicture} alt="Profile Pic" />
+                                    <img src={user.profilePicture === '/uploads/avatar.png' ? process.env.REACT_APP_DEF_FOLDER+user.profilePicture : user.profilePicture} alt="Profile Pic" />
                                 </div>
                                 <div className="user__info">
                                     <h2>{user.firstName + ' ' + user.lastName}</h2>
@@ -51,7 +41,7 @@ export default function User({ users, title }) {
                         ))}
                     </div>
                     {users?.length < 1 && (
-                        <h1 className="no__user">Nothin found!</h1>
+                        <h1 className="no__user">Nothing found!</h1>
                     )}
                 </div>
             </div>

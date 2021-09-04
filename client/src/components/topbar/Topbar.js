@@ -25,8 +25,7 @@ export default function Topbar() {
 
     const searchHandler = async (term) => {
         try {
-            const res = await axios.get(`/api/search?term=${term}`)
-            console.log(res)
+            const res = await axios.get(`/search?term=${term}`)
             if (res.status === 200) {
                 setSearchResponse(res.data)
                 if(res.data.length > 0){
@@ -169,7 +168,7 @@ export default function Topbar() {
                 </div>
                 <div className="topbar__right d__flex align__center">
                     <Link to={`/profile/${user?.id}`} className="topbar__info d__flex align__center">
-                        <img src={profilePicture} className="topbar__info_icon" alt="Profile" ref={topBarPic} />
+                        <img src={profilePicture === '/uploads/avatar.png' ? process.env.REACT_APP_DEF_FOLDER+profilePicture : profilePicture} className="topbar__info_icon" alt="Profile" ref={topBarPic} />
                         <h4>{profile?.firstName?.toUpperCase()}</h4>
                     </Link>
                     <div className="topbar__action_btns">

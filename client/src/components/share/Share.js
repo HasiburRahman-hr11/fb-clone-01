@@ -19,7 +19,7 @@ export default function Share() {
     const [file, setFile] = useState('');
     const [text, setText] = useState('')
 
-    const userId = user.id
+    const userId = user?.id
 
     const formData = new FormData()
     formData.append('description', text)
@@ -32,7 +32,7 @@ export default function Share() {
         e.preventDefault();
 
         try {
-            const res = await axios.post('/api/posts/create-post', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+            const res = await axios.post('/posts/create-post', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
 
             setPosts(res.data.reverse());
             setText('')
@@ -59,7 +59,7 @@ export default function Share() {
             <div className="share__post">
                 <div className="share__wrapper">
                     <div className="share__top d__flex align__center">
-                        <img src={profilePicture} className="share__profile_pic" alt="Profile" ref={sharePic} />
+                        <img src={profilePicture === '/uploads/avatar.png' ? process.env.REACT_APP_DEF_FOLDER+profilePicture : profilePicture}  className="share__profile_pic" alt="Profile" ref={sharePic} />
                         <div className="share__fake_form">
                             <p  
                                 className="share__fake_input d__flex align__center"

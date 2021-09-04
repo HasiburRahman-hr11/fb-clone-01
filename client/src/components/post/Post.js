@@ -7,12 +7,14 @@ import UserContext from '../../context/UserContext';
 import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from '../button/Button';
+import { AuthContext } from '../../context/authContext/authContext';
 
 
 
 
 export default function Post({ post, isUser }) {
-    const { user , setPosts } = useContext(UserContext)
+    const {  setPosts } = useContext(UserContext)
+    const { user } = useContext(AuthContext)
 
     let [liked, setLiked] = useState(false);
     let [totalLike, setTotalLike] = useState(null);
@@ -22,10 +24,10 @@ export default function Post({ post, isUser }) {
     const handleLike = async () => {
         try {
             const data = {
-                userId: user.id
+                userId: user?.id
             }
 
-            const res = await axios.put(`/api/posts/like/${post._id}`, data);
+            const res = await axios.put(`/posts/like/${post._id}`, data);
             if (res.status === 200) {
                 setLiked(!liked)
             }
@@ -45,10 +47,9 @@ export default function Post({ post, isUser }) {
     // Delete Post
     const handlePostDelete = async () => {
         try{
-             const res = await axios.delete(`/api/posts/delete/${post._id}` , {data:{userId:user?.id}});
+             const res = await axios.delete(`/posts/delete/${post._id}` , {data:{userId:user?.id}});
             setModal(false);
             setPosts(res.data.reverse());
-            // window.location.reload(false);
         }catch(e){
             //error
         }
@@ -57,8 +58,8 @@ export default function Post({ post, isUser }) {
 
     useEffect(() => {
         setTotalLike(post.likes.length)
-        setLiked(post.likes.includes(user.id))
-    }, [post, user.id])
+        setLiked(post.likes.includes(user?.id))
+    }, [post, user?.id])
 
     return (
         <div className="posts">

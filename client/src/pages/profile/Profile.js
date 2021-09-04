@@ -26,7 +26,7 @@ export default function Profile() {
 
     const [profile, setProfile] = useState({});
     const [posts, setPosts] = useState([]);
-    const [isLoading, setIsloading] = useState(true);
+    const [isLoading, setIsloading] = useState(null);
     const [deleteModal, setDeleteModal] = useState(false);
     const [followings, setFollowings] = useState(null)
 
@@ -41,20 +41,14 @@ export default function Profile() {
 
     useEffect(() => {
 
-        // Checking if user is logged in
-        const token = localStorage.getItem('token');
-        if (!token) {
-            history.push('/auth/login');
-        }
-
-        // Fetch Profile Data from Mongodb
         const fetchProfile = async () => {
+            setIsloading(true)
             try {
-                const res = await axios.get(`/api/profile/${params?.id}`)
+                const res = await axios.get(`/profile/${params?.id}`)
                 setProfile(res.data)
                 setPosts(res.data.posts.reverse())
                 res.data.followers.forEach((follower)=>{
-                    setFollowings(Object.values(follower).includes(user.id))
+                    setFollowings(Object.values(follower).includes(user?.id))
                 })
 
                 setIsloading(false)
@@ -67,7 +61,7 @@ export default function Profile() {
 
 
 
-    }, [params, history, user.id]);
+    }, [params.id, history, user?.id]);
 
 
 
@@ -77,13 +71,15 @@ export default function Profile() {
         formData.append('profile-picture', file);
 
         try {
-            const res = await axios.post(`/api/profile/upload-profile/${params?.id}`, formData)
+            const res = await axios.post(`/profile/upload-profile/${params?.id}`, formData)
+            console.log(res)
             profilePic.current.src = res.data.newProfilePicture;
             sharePic.current.src = res.data.newProfilePicture;
             topBarPic.current.src = res.data.newProfilePicture;
             setProfilePicture(res.data.newProfilePicture);
-        } catch (e) {
+        } catch (error) {
             // error
+            console.log(error)
         }
 
     }
@@ -95,7 +91,7 @@ export default function Profile() {
         formData.append('cover-photo', file);
 
         try {
-            const res = await axios.post(`/api/profile/upload-cover/${params?.id}`, formData)
+            const res = await axios.post(`/profile/upload-cover/${params?.id}`, formData)
             coverPic.current.src = res.data.newcoverPhoto;
         } catch (e) {
             // error
@@ -107,7 +103,7 @@ export default function Profile() {
     const deleteProfileHandler = async () => {
         try {
 
-            const res = await axios.delete(`/api/profile/delete/${params?.id}`)
+            const res = await axios.delete(`/profile/delete/${params?.id}`)
             if (res.status === 200) {
                 localStorage.removeItem('token');
                 history.push('/auth/login')
@@ -123,7 +119,7 @@ export default function Profile() {
     const handleFollow = async () => {
         const sender = user.id
         try {
-            const res = await axios.put(`/api/profile/follow/${params?.id}`, { senderId: sender })
+            const res = await axios.put(`/profile/follow/${params?.id}`, { senderId: sender })
             if (res.status === 200) {
                 setFollowings(!followings)
             }
@@ -144,7 +140,7 @@ export default function Profile() {
                 <div className="profile__top">
                     <div className="profile__top_wrapper">
                         <div className="profile__images">
-                            <img src={profile?.coverPhoto} alt="Profile Cover" className="cover__photo" ref={coverPic} />
+                            <img src={profile.coverPhoto === '/uploads/cover.jpg' ? process.env.REACT_APP_DEF_FOLDER+profile.coverPhoto : profile?.coverPhoto} alt="Profile Cover" className="cover__photo" ref={coverPic} />
                             {user?.id === profile?.user && (
                                 <label htmlFor="cover-photo" className="edit__cover">
                                     <Edit className="edit__cover_icon" />
@@ -153,7 +149,7 @@ export default function Profile() {
                             )}
 
                             <div className="profile__picture">
-                                <img src={profile?.profilePicture} alt="Profile" id="profilePicture" ref={profilePic} />
+                                <img src={profile.profilePicture === '/uploads/avatar.png' ? process.env.REACT_APP_DEF_FOLDER+profile?.profilePicture : profile?.profilePicture} alt="Profile" id="profilePicture" ref={profilePic} />
                                 {user?.id === profile?.user && (
                                     <label htmlFor="profile-picture" className="upload__profile_pic">
                                         <CameraAlt className="upload__profile_icon" />

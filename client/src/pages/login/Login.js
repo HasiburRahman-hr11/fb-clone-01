@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
 import './login.css';
+import { AuthContext } from '../../context/authContext/authContext';
+import { login } from '../../context/authContext/apiCalls';
+import {CircularProgress} from '@material-ui/core'
 
 
 export default function Login() {
+    const { dispatch, isFetching, error: loginError } = useContext(AuthContext)
 
     const [formData, setFormData] = useState({
         email: '',
@@ -13,42 +16,28 @@ export default function Login() {
     const [error, setError] = useState({});
     const history = useHistory();
 
-    useEffect(()=>{
-        // Checking if user is logged in
-        const token = localStorage.getItem('token');
-        if (token) {
-            history.push('/');
-        }
-    },[history])
-    
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
     let errors = {}
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        try {
-            const res = await axios.post('/api/auth/login', formData);
-            localStorage.setItem('token', res.data.token)
+        login(dispatch, formData);
+        history.push('/');
 
-            setFormData({
-                email: '',
-                password: ''
-            });
-            history.push('/');
-            window.location.reload();
-        } catch (e) {
-            if (e.response.data.errorEmail) {
-                errors.email = e.response.data.errorEmail
-            }
-            if (e.response.data.errorPass) {
-                errors.password = e.response.data.errorPass
-            }
-            setError(errors)
-        }
+        // if (loginError?.response.data.errorEmail) {
+        //     errors.email = loginError?.response.data.errorEmail
+        // }
+        // if (loginError?.response.data.errorPass) {
+        //     errors.password = loginError?.response.data.errorPass
+        // }
+        // setError(errors)
+
+        
 
     }
 
@@ -91,7 +80,7 @@ export default function Login() {
                             </div>
                             <div className="input__group">
                                 <button className="form__btn auth__btn" type="submit" >
-                                    Login
+                                    {isFetching ? <CircularProgress className="login_icon" /> : 'Login'}
                                 </button>
                             </div>
                         </form>

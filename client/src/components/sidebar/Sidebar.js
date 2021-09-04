@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 // import axios from 'axios';
 
@@ -13,24 +13,22 @@ import Loading from '../loading/Loading';
 
 // Context
 import UserContext from '../../context/UserContext';
+import { logout } from '../../context/authContext/authActions';
+import { AuthContext } from '../../context/authContext/authContext';
 
 
 export default function Sidebar() {
     const { user, profile, profilePicture, isLoading } = useContext(UserContext);
+    const {dispatch} = useContext(AuthContext)
 
 
     const history = useHistory();
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            history.push('/auth/login');
-        }
-    }, [user, history])
-
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        window.location.reload();
+        localStorage.removeItem("fb_token");
+        localStorage.removeItem("fb_user");
+        dispatch(logout())
+        history.push('/auth/login')
     }
     return (
         <div className="sidebar scrollbar">
@@ -38,7 +36,7 @@ export default function Sidebar() {
                 <Loading />
             )}
             <Link to={`/profile/${user?.id}`}>
-                <SidebarItem src={profilePicture} title={profile?.firstName + ' ' + profile?.lastName} />
+                <SidebarItem src={profilePicture === '/uploads/avatar.png' ? process.env.REACT_APP_DEF_FOLDER+profilePicture : profilePicture}  title={profile?.firstName + ' ' + profile?.lastName} />
             </Link>
             <Link to="/followers">
                 <SidebarItem Icon={People} title="Followers" />
