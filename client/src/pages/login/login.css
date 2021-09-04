@@ -78,7 +78,11 @@
     text-decoration: none;
     margin-top: 15px;
 }
-
+.login_icon{
+    color: #fff !important;
+    width: 25px !important;
+    height: 25px !important;
+}
 @media only screen and (max-width:800px) {
     .auth__page_wrapper {
         flex-direction: column;
