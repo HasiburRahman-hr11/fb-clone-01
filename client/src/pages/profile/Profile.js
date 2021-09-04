@@ -71,7 +71,7 @@ export default function Profile() {
         formData.append('profile-picture', file);
 
         try {
-            const res = await axios.post(`/profile/upload-profile/${params?.id}`, formData)
+            const res = await axios.post(`/api/profile/upload-profile/${params?.id}`, formData)
             console.log(res)
             profilePic.current.src = res.data.newProfilePicture;
             sharePic.current.src = res.data.newProfilePicture;
@@ -91,7 +91,7 @@ export default function Profile() {
         formData.append('cover-photo', file);
 
         try {
-            const res = await axios.post(`/profile/upload-cover/${params?.id}`, formData)
+            const res = await axios.post(`/api/profile/upload-cover/${params?.id}`, formData)
             coverPic.current.src = res.data.newcoverPhoto;
         } catch (e) {
             // error
@@ -103,7 +103,7 @@ export default function Profile() {
     const deleteProfileHandler = async () => {
         try {
 
-            const res = await axios.delete(`/profile/delete/${params?.id}`)
+            const res = await axios.delete(`/api/profile/delete/${params?.id}`)
             if (res.status === 200) {
                 localStorage.removeItem('token');
                 history.push('/auth/login')
@@ -119,7 +119,7 @@ export default function Profile() {
     const handleFollow = async () => {
         const sender = user.id
         try {
-            const res = await axios.put(`/profile/follow/${params?.id}`, { senderId: sender })
+            const res = await axios.put(`/api/profile/follow/${params?.id}`, { senderId: sender })
             if (res.status === 200) {
                 setFollowings(!followings)
             }
