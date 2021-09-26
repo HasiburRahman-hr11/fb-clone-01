@@ -6,9 +6,10 @@ import Post from '../post/Post';
 import { useContext } from 'react';
 
 import UserContext from '../../context/UserContext';
+import { Link } from 'react-router-dom';
 
 export default function Feed() {
-    const { posts} = useContext(UserContext)
+    const { posts } = useContext(UserContext)
 
     return (
         <div className="feed">
@@ -20,7 +21,15 @@ export default function Feed() {
                 ))
             }
             {posts.length < 1 && (
-                <h2 className="no__post">No Post found!</h2>
+                <>
+                    <h2 className="no__post mb-3">No Post found!</h2>
+                    <p style={{fontSize:'17px'}}>
+                        <Link to="/people/all">
+                            <strong style={{ color: '#1877F2' }} >Follow </strong>
+                        </Link> 
+                        people to see their posts or create one.
+                    </p>
+                </>
             )}
         </div>
     )
